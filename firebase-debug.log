@@ -1,0 +1,21 @@
+[debug] [2022-09-24T17:00:39.619Z] ----------------------------------------------------------------------
+[debug] [2022-09-24T17:00:39.621Z] Command:       /home/amay/.nvm/versions/node/v16.13.2/bin/node /home/amay/.nvm/versions/node/v16.13.2/bin/firebase init
+[debug] [2022-09-24T17:00:39.621Z] CLI Version:   11.10.0
+[debug] [2022-09-24T17:00:39.621Z] Platform:      linux
+[debug] [2022-09-24T17:00:39.621Z] Node Version:  v16.13.2
+[debug] [2022-09-24T17:00:39.622Z] Time:          Sat Sep 24 2022 22:30:39 GMT+0530 (India Standard Time)
+[debug] [2022-09-24T17:00:39.622Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-09-24T17:00:39.626Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-09-24T17:00:39.627Z] > authorizing via signed-in user (amaynayak08@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/amay/Documents/temp/amay
+
