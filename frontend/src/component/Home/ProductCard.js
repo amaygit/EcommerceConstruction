@@ -8,10 +8,15 @@ const ProductCard = ({ product }) => {
     readOnly: true,
     precision: 0.5,
   };
+  const name = product.name
+    ? product.name.length <= 55
+      ? product.name
+      : `${product.name.slice(0, 55)}...`
+    : "";
   return (
     <Link className="productCard" to={`/product/${product._id}`}>
-      <img src={product.images[0].url} alt={product.name} />
-      <p>{product.name}</p>
+      <img src={product.images[0].url} alt={name} />
+      <p>{name}</p>
       <div>
         <Rating {...options} />{" "}
         <span className="productCardSpan">

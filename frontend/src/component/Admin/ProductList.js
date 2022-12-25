@@ -6,6 +6,7 @@ import {
   clearErrors,
   getAdminProduct,
   deleteProduct,
+  getSuperAdminProduct,
 } from "../../actions/productAction";
 import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
@@ -22,6 +23,7 @@ const ProductList = ({ history }) => {
   const alert = useAlert();
 
   const { error, products } = useSelector((state) => state.products);
+  const { user } = useSelector((state) => state.user);
 
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.product
@@ -47,9 +49,12 @@ const ProductList = ({ history }) => {
       history.push("/admin/dashboard");
       dispatch({ type: DELETE_PRODUCT_RESET });
     }
-
-    dispatch(getAdminProduct());
-  }, [dispatch, alert, error, deleteError, history, isDeleted]);
+    if (user.role === "superadmin") {
+      dispatch(getSuperAdminProduct());
+    } else {
+      dispatch(getAdminProduct());
+    }
+  }, [dispatch, alert, error, deleteError, history, isDeleted, user]);
 
   const columns = [
     { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
@@ -93,8 +98,7 @@ const ProductList = ({ history }) => {
             <Button
               onClick={() =>
                 deleteProductHandler(params.getValue(params.id, "id"))
-              }
-            >
+              }>
               <DeleteIcon />
             </Button>
           </Fragment>

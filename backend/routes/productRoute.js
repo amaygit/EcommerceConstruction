@@ -9,6 +9,7 @@ const {
   getProductReviews,
   deleteReview,
   getAdminProducts,
+  getSuperAdminProducts,
 } = require("../controllers/productController");
 const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 
@@ -17,17 +18,41 @@ const router = express.Router();
 router.route("/products").get(getAllProducts);
 
 router
+  .route("/superadmin/products")
+  .get(
+    isAuthenticatedUser,
+    authorizeRoles("admin", "superadmin"),
+    getSuperAdminProducts
+  );
+
+router
   .route("/admin/products")
-  .get(isAuthenticatedUser, authorizeRoles("admin"), getAdminProducts);
+  .get(
+    isAuthenticatedUser,
+    authorizeRoles("admin", "superadmin"),
+    getAdminProducts
+  );
 
 router
   .route("/admin/product/new")
-  .post(isAuthenticatedUser, authorizeRoles("admin"), createProduct);
+  .post(
+    isAuthenticatedUser,
+    authorizeRoles("admin", "superadmin"),
+    createProduct
+  );
 
 router
   .route("/admin/product/:id")
-  .put(isAuthenticatedUser, authorizeRoles("admin"), updateProduct)
-  .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteProduct);
+  .put(
+    isAuthenticatedUser,
+    authorizeRoles("admin", "superadmin"),
+    updateProduct
+  )
+  .delete(
+    isAuthenticatedUser,
+    authorizeRoles("admin", "superadmin"),
+    deleteProduct
+  );
 
 router.route("/product/:id").get(getProductDetails);
 

@@ -21,11 +21,9 @@ const UpdateUser = ({ history, match }) => {
 
   const { loading, error, user } = useSelector((state) => state.userDetails);
 
-  const {
-    loading: updateLoading,
-    error: updateError,
-    isUpdated,
-  } = useSelector((state) => state.profile);
+  const { loading: updateLoading, error: updateError, isUpdated } = useSelector(
+    (state) => state.profile
+  );
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -81,8 +79,7 @@ const UpdateUser = ({ history, match }) => {
           ) : (
             <form
               className="createProductForm"
-              onSubmit={updateUserSubmitHandler}
-            >
+              onSubmit={updateUserSubmitHandler}>
               <h1>Update User</h1>
 
               <div>
@@ -110,6 +107,7 @@ const UpdateUser = ({ history, match }) => {
                 <VerifiedUserIcon />
                 <select value={role} onChange={(e) => setRole(e.target.value)}>
                   <option value="">Choose Role</option>
+                  <option value="superadmin">Super Admin</option>
                   <option value="admin">Admin</option>
                   <option value="user">User</option>
                 </select>
@@ -120,8 +118,7 @@ const UpdateUser = ({ history, match }) => {
                 type="submit"
                 disabled={
                   updateLoading ? true : false || role === "" ? true : false
-                }
-              >
+                }>
                 Update
               </Button>
             </form>

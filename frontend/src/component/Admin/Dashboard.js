@@ -5,7 +5,10 @@ import { Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { Doughnut, Line } from "react-chartjs-2";
 import { useSelector, useDispatch } from "react-redux";
-import { getAdminProduct } from "../../actions/productAction";
+import {
+  getAdminProduct,
+  getSuperAdminProduct,
+} from "../../actions/productAction";
 import { getAllOrders } from "../../actions/orderAction.js";
 import { getAllUsers } from "../../actions/userAction.js";
 import MetaData from "../layout/MetaData";
@@ -14,6 +17,7 @@ const Dashboard = () => {
   const dispatch = useDispatch();
 
   const { products } = useSelector((state) => state.products);
+  const { user } = useSelector((state) => state.user);
 
   const { orders } = useSelector((state) => state.allOrders);
 
@@ -29,10 +33,14 @@ const Dashboard = () => {
     });
 
   useEffect(() => {
-    dispatch(getAdminProduct());
+    if (user.role === "admin") {
+      dispatch(getAdminProduct());
+    } else if (user.role === "superadmin") {
+      dispatch(getSuperAdminProduct());
+    }
     dispatch(getAllOrders());
     dispatch(getAllUsers());
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   let totalAmount = 0;
   orders &&

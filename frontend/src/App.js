@@ -1,7 +1,12 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import Header from "./component/layout/Header/Header.js";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useLocation,
+} from "react-router-dom";
 import WebFont from "webfontloader";
 import React from "react";
 import Footer from "./component/layout/Footer/Footer";
@@ -42,6 +47,7 @@ import ProductReviews from "./component/Admin/ProductReviews";
 import Contact from "./component/layout/Contact/Contact";
 import About from "./component/layout/About/About";
 import NotFound from "./component/layout/Not Found/NotFound";
+import RouteListener from "./component/Route/RouteListener";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -71,7 +77,7 @@ function App() {
   return (
     <Router>
       <Header />
-
+      <RouteListener />
       {isAuthenticated && <UserOptions user={user} />}
 
       {stripeApiKey && (

@@ -11,8 +11,10 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
 import RateReviewIcon from "@material-ui/icons/RateReview";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
+  const { user } = useSelector((state) => state.user);
   return (
     <div className="sidebar">
       <Link to="/">
@@ -26,8 +28,7 @@ const Sidebar = () => {
       <Link>
         <TreeView
           defaultCollapseIcon={<ExpandMoreIcon />}
-          defaultExpandIcon={<ImportExportIcon />}
-        >
+          defaultExpandIcon={<ImportExportIcon />}>
           <TreeItem nodeId="1" label="Products">
             <Link to="/admin/products">
               <TreeItem nodeId="2" label="All" icon={<PostAddIcon />} />
@@ -45,11 +46,13 @@ const Sidebar = () => {
           Orders
         </p>
       </Link>
-      <Link to="/admin/users">
-        <p>
-          <PeopleIcon /> Users
-        </p>
-      </Link>
+      {user.role === "superadmin" && (
+        <Link to="/admin/users">
+          <p>
+            <PeopleIcon /> Users
+          </p>
+        </Link>
+      )}
       <Link to="/admin/reviews">
         <p>
           <RateReviewIcon />

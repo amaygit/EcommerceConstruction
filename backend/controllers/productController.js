@@ -3,6 +3,7 @@ const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apifeatures");
 const cloudinary = require("cloudinary");
+var ObjectId = require("mongodb").ObjectId;
 
 // Create Product -- Admin
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
@@ -64,8 +65,21 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Get All Product (Admin)
+// Get All Product (Super Admin)
 exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
+  const uid = req.user._id;
+  const products = await Product.find({
+    user: new ObjectId(uid),
+  });
+
+  res.status(200).json({
+    success: true,
+    products,
+  });
+});
+
+// Get All Product (Super Admin)
+exports.getSuperAdminProducts = catchAsyncErrors(async (req, res, next) => {
   const products = await Product.find();
 
   res.status(200).json({

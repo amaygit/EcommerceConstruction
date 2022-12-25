@@ -35,7 +35,7 @@ const UserOptions = ({ user }) => {
     { icon: <ExitToAppIcon />, name: "Logout", func: logoutUser },
   ];
 
-  if (user.role === "admin") {
+  if (user.role === "admin" || user.role === "superadmin") {
     options.unshift({
       icon: <DashboardIcon />,
       name: "Dashboard",
@@ -78,8 +78,7 @@ const UserOptions = ({ user }) => {
             src={user.avatar.url ? user.avatar.url : "/Profile.png"}
             alt="Profile"
           />
-        }
-      >
+        }>
         {options.map((item) => (
           <SpeedDialAction
             key={item.name}
